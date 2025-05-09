@@ -15,7 +15,8 @@
 				"issues": "https://github.com/legotaylor/ornithe-example-mod/issues",
 				"sources": "https://github.com/legotaylor/ornithe-example-mod"
 			},
-			"icon": "assets/modid/icon.png"
+			"icon": "assets/modid/icon.png",
+			"license": "CC0-1.0"
 		},
 		"intermediate_mappings": "net.fabricmc:intermediary",
 		"depends": [

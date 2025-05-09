@@ -1,8 +1,5 @@
-# Fabric Example Mod
-
-## Setup
-
-For setup instructions please see the [fabric documentation page](https://docs.fabricmc.net/develop/getting-started/setting-up-a-development-environment) that relates to the IDE that you are using.
+# Ornithe Example Mod
+Based on [Fabric Example Mod](https://github.com/FabricMC/fabric-example-mod/) modified for use with [Quilt](https://quiltmc.org/en/) using [OrnitheMC](https://ornithemc.net) for older versions of Minecraft.
 
 ## License
 
