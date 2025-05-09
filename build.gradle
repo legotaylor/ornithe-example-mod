@@ -1,5 +1,6 @@
 plugins {
-	id 'fabric-loom' version '1.10-SNAPSHOT'
+	id 'org.quiltmc.loom' version '1.8-SNAPSHOT'
+	id 'ploceus' version '1.8-SNAPSHOT'
 	id 'maven-publish'
 }
 
@@ -19,38 +20,35 @@ repositories {
 }
 
 loom {
-	splitEnvironmentSourceSets()
-
 	mods {
 		"modid" {
 			sourceSet sourceSets.main
-			sourceSet sourceSets.client
 		}
 	}
 
 }
 
+ploceus {
+	if (project.clientOnly) clientOnlyMappings()
+}
+
 dependencies {
 	// To change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
-	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
-	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
-
-	// Fabric API. This is technically optional, but you probably want it anyway.
-	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-	
+	mappings ploceus.featherMappings(project.feather_mappings)
+	modImplementation "org.quiltmc:quilt-loader:${project.loader_version}"
 }
 
 processResources {
-	inputs.property "version", project.version
+	inputs.properties 'version': version, 'group': project.maven_group
 
-	filesMatching("fabric.mod.json") {
-		expand "version": inputs.properties.version
+	filesMatching('quilt.mod.json') {
+		expand 'version': version, 'group': project.maven_group
 	}
 }
 
 tasks.withType(JavaCompile).configureEach {
-	it.options.release = 21
+	it.options.release = 8
 }
 
 java {
@@ -59,8 +57,8 @@ java {
 	// If you remove this line, sources will not be generated.
 	withSourcesJar()
 
-	sourceCompatibility = JavaVersion.VERSION_21
-	targetCompatibility = JavaVersion.VERSION_21
+	sourceCompatibility = JavaVersion.VERSION_1_8
+	targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 jar {
